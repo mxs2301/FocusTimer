@@ -2,5 +2,8 @@
 
 ## To-Do 
 
-- [] Get dependency list for
-- [] Read up on using Asyc or multithreading
+- [ ] Get dependency list for
+  - [ ] SQL Libraries
+  - [ ] GUI-Frontend to represent the application(Native or Web?)
+- [ ] Read up on using Asyc or multithreading and if it makes sense
+
