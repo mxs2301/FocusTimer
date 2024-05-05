@@ -1,20 +1,16 @@
 #![feature(duration_constructors)]
-mod timer;
 
+mod timer;
 use std::env;
-use std::io::stdin;
+use std::io;
 use std::process::exit;
-use std::{
-    io::{self, Read},
-    time::Duration,
-};
-use timer::timer_mockup;
+
 
 fn main() {
     
     let x: Vec<String>  = env::args().collect();
 
-    if x[1] == "cli".to_string(){
+    if x[1].trim() == "cli"{
         if let Ok(x) = cli_mode(){
             exit(x)
         }
@@ -35,7 +31,7 @@ fn cli_mode()-> io::Result<i32>{
         println!("Press q to quit");
         println!("Press s to start");
         let mut buf = String::new();
-        let _ =  stdin().read_line(&mut buf);
+        let _ =  io::stdin().read_line(&mut buf);
         match buf.as_str().trim() {
             "q" =>{
                 break;
@@ -52,7 +48,8 @@ fn cli_mode()-> io::Result<i32>{
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::timer::timer_mockup;
+    use std::time::Duration;
 
     #[test]
     fn mockup_test() {
