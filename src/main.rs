@@ -4,7 +4,8 @@ mod timer;
 use std::env;
 use std::io;
 use std::process::exit;
-
+use clearscreen::clear;
+use clearscreen::ClearScreen;
 
 fn main() {
     
@@ -28,16 +29,26 @@ fn main() {
 fn cli_mode()-> io::Result<i32>{
     loop {
         println!("Focus Timer - CLI Mode");
-        println!("Press q to quit");
-        println!("Press s to start");
+        println!("Press q - quit, s - start\n");
         let mut buf = String::new();
         let _ =  io::stdin().read_line(&mut buf);
         match buf.as_str().trim() {
             "q" =>{
+                if let Err(x) = clear(){
+                    eprintln!("{}", x);
+                    exit(1);
+                }
+                println!("Goodbye :)");
                 break;
-            }
+            },
+            "s" => {
+                todo!();
+            },
             _ => {
                 buf.clear();
+                if let Err(x) = clear(){
+                    eprintln!("{}", x);
+                }
                 continue;
             }
         }
