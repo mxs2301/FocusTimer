@@ -1,7 +1,23 @@
+use std::fmt::{Display, Write};
 use std::io;
 use std::{thread::sleep, time::Duration};
 
 use clearscreen::clear;
+
+enum TimerType {
+    Break,
+    Focus,
+}
+
+impl Display for TimerType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            TimerType::Break => write!(f, "Break"),
+            TimerType::Focus => write!(f, "Focus"),
+        }
+    }
+}
+
 pub fn timer_mockup(duration: Duration) -> (u64, u64) {
     let mut countdown = duration.as_secs();
 
@@ -28,13 +44,13 @@ pub fn start() {
     let (duration, amount, break_time) = get_time();
 
     for _ in 0..amount {
-        timer(duration);
+        timer_cli(duration, TimerType::Focus);
         println!("Break");
-        timer(break_time as i16);
+        timer_cli(break_time as i16, TimerType::Break);
     }
 }
 
-fn timer(durr: i16) {
+fn timer_cli(durr: i16, timer_type: TimerType) {
     let duration = Duration::from_mins(durr as u64);
 
     let mut countdown = duration.as_secs();
@@ -43,7 +59,10 @@ fn timer(durr: i16) {
 
     let mut seconds = 0;
     while countdown != 0 {
-        println!("{}:{}", minutes, seconds);
+        if let Err(err) = clear() {
+            eprintln!("{}", err);
+        }
+        println!("{}:{} - {}", minutes, seconds, timer_type);
 
         if seconds == 0 {
             seconds = 59;
@@ -53,6 +72,10 @@ fn timer(durr: i16) {
         }
         countdown -= 1;
         sleep(Duration::from_secs(1));
+    }
+
+    if let Err(err) = clear() {
+        eprintln!("{err}");
     }
 }
 
