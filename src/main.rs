@@ -1,52 +1,50 @@
 #![feature(duration_constructors)]
 
+mod audio;
 mod timer;
+use audio::play;
+use clearscreen::clear;
 use std::env;
 use std::io;
 use std::process::exit;
-use clearscreen::clear;
-use clearscreen::ClearScreen;
 
 fn main() {
-    
-    let x: Vec<String>  = env::args().collect();
+    let x: Vec<String> = env::args().collect();
 
-    if x[1].trim() == "cli"{
-        if let Ok(x) = cli_mode(){
+    println!("This is hell my friends");
+
+    if x[1].trim() == "cli" {
+        if let Ok(x) = cli_mode() {
             exit(x)
         }
-
-    }else{
+    } else {
         exit(1);
     }
-
-
-
-
-
+    println!("This is text");
 }
 
-fn cli_mode()-> io::Result<i32>{
+fn cli_mode() -> io::Result<i32> {
     loop {
         println!("Focus Timer - CLI Mode");
         println!("Press q - quit, s - start\n");
         let mut buf = String::new();
-        let _ =  io::stdin().read_line(&mut buf);
+        let _ = io::stdin().read_line(&mut buf);
         match buf.as_str().trim() {
-            "q" =>{
-                if let Err(x) = clear(){
-                    eprintln!("{}", x);
+            "q" => {
+                if let Err(error) = clear() {
+                    eprintln!("{}", error);
                     exit(1);
                 }
                 println!("Goodbye :)");
                 break;
-            },
+            }
             "s" => {
-                todo!();
-            },
+                // todo!();
+                timer::start();
+            }
             _ => {
                 buf.clear();
-                if let Err(x) = clear(){
+                if let Err(x) = clear() {
                     eprintln!("{}", x);
                 }
                 continue;
@@ -59,12 +57,18 @@ fn cli_mode()-> io::Result<i32>{
 
 #[cfg(test)]
 mod tests {
+    use super::audio::play;
+    //use super::timer::get_time;
     use super::timer::timer_mockup;
     use std::time::Duration;
-
+    // #[test]
+    // fn mockup_test() {
+    //     let durration = Duration::from_mins(1);
+    //     assert_eq!((0, 0), timer_mockup(durration));
+    // }
     #[test]
-    fn mockup_test() {
-        let durration = Duration::from_mins(1);
-        assert_eq!((0, 0), timer_mockup(durration));
+    fn test_playback() {
+        let file = std::fs::File::open("/home/max/Projects/FocusTimer/media/success.mp3").unwrap();
+        play(file).unwrap();
     }
 }
