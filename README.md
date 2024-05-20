@@ -4,8 +4,9 @@
 
 
 - [ ] Cli-Mode
-  - [ ] Add a song to mark end of breaks and sessions
-    - [ ] Read up on how to use sounds in Rust
+  - [x] Add a song to mark end of breaks and sessions
+  - [ ] Add a way 
+    - [x] Read up on how to use sounds in Rust
 - [ ] Get dependency list for
   - [ ] SQL Libraries
   - [ ] GUI-Frontend to represent the application(Native or Web?)
