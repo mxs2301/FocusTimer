@@ -2,16 +2,14 @@
 
 mod audio;
 mod timer;
-use audio::play;
+
 use clearscreen::clear;
 use std::env;
-use std::io;
+use std::io::{stdin, stdout, Result, Write};
 use std::process::exit;
 
 fn main() {
     let x: Vec<String> = env::args().collect();
-
-    println!("This is hell my friends");
 
     if x[1].trim() == "cli" {
         if let Ok(x) = cli_mode() {
@@ -20,15 +18,16 @@ fn main() {
     } else {
         exit(1);
     }
-    println!("This is text");
 }
 
-fn cli_mode() -> io::Result<i32> {
+fn cli_mode() -> Result<i32> {
     loop {
         println!("Focus Timer - CLI Mode");
-        println!("Press q - quit, s - start\n");
+        println!("Press q - quit | s - start");
+        print!("Your input: ");
+        stdout().flush()?;
         let mut buf = String::new();
-        let _ = io::stdin().read_line(&mut buf);
+        let _ = stdin().read_line(&mut buf);
         match buf.as_str().trim() {
             "q" => {
                 if let Err(error) = clear() {
@@ -39,7 +38,6 @@ fn cli_mode() -> io::Result<i32> {
                 break;
             }
             "s" => {
-                // todo!();
                 timer::start();
             }
             _ => {
@@ -59,8 +57,8 @@ fn cli_mode() -> io::Result<i32> {
 mod tests {
     use super::audio::play;
     //use super::timer::get_time;
-    use super::timer::timer_mockup;
-    use std::time::Duration;
+    //use super::timer::timer_mockup;
+    //use std::time::Duration;
     // #[test]
     // fn mockup_test() {
     //     let durration = Duration::from_mins(1);
