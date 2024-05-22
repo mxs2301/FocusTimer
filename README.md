@@ -10,6 +10,7 @@
   - [x] Add a song to mark end of breaks and sessions
   - [ ] Add a way interactively select sound
   - [x] Read up on how to use sounds in Rust
+  - [ ] Refactor print statements
 - [ ] Get dependency list for
   - [ ] SQL Libraries
   - [ ] GUI-Frontend to represent the application(Native or Web?)
