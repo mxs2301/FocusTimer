@@ -4,6 +4,9 @@
 
 
 - [ ] Cli-Mode
+  - [x] Add a song to mark end of breaks and sessions 
+  - [x] Read up on how to use sounds in Rust
+  - [ ] Fix the audio bug
   - [x] Add a song to mark end of breaks and sessions
   - [ ] Add a way interactively select sound
   - [x] Read up on how to use sounds in Rust
