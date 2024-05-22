@@ -1,4 +1,4 @@
-use crate::audio::play;
+use crate::audio;
 use clearscreen::clear;
 use std::error::Error;
 use std::fs::File;
@@ -29,27 +29,35 @@ fn timer(duration: Duration) -> (u64, u64) {
     (minutes, seconds)
 }
 pub fn start() {
+    clear().expect("Clear failed");
     let (session_time, break_time, session_amount) = setup_session_details().expect("False input");
-    let audio_file = setup_audio().expect("File not found or at wrong location");
+    // let audio_file = setup_audio().expect("File not found or at wrong location");
 
     session_notification(
         "Your session will start in 5 seconds\nHave fun focusing! :)",
         5,
     );
 
+    audio::play(get_audio_file().expect("Opening of file failed"))
+        .expect("Audio could not be played");
+
     for _ in 0..session_amount {
         timer(create_duration(session_time));
-        play(audio_file.try_clone().expect("Cloning failed"))
-            .expect("Audio was not able to be played");
+        audio::play(get_audio_file().expect("Opening of file failed"))
+            .expect("Audio could not be played");
+        // play(audio_file.try_clone().expect("Cloning failed"))
+        //     .expect("Audio was not able to be played");
         session_notification("Your break will start in 5 seconds", 5);
         timer(create_duration(break_time));
         session_notification("Your break is over in 5 seconds", 5);
     }
     clear().expect("Access to clear failed horribly");
     session_notification(
-        "You did it!, you will be brought back to the main menun in 5 seconds",
+        "You did it!, you will be brought back to the main menu in 5 seconds",
         5,
     );
+
+    clear().expect("Access to clear failed horribly");
 }
 
 fn session_notification(msg: &str, time: u64) {
@@ -84,10 +92,9 @@ fn create_duration(time: i32) -> Duration {
     Duration::from_mins(time as u64)
 }
 
-fn setup_audio() -> Result<File, Box<dyn Error>> {
+fn get_audio_file() -> Result<File, Box<dyn Error>> {
     let path = std::path::Path::new("/home/max/Projects/FocusTimer/media/success.mp3");
+    let audio_file = File::open(path)?;
 
-    let file = File::open(path)?;
-
-    Ok(file)
+    Ok(audio_file)
 }
