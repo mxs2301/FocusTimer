@@ -13,7 +13,7 @@ pub fn play(file : File)-> Result<(), Box<dyn Error>> {
 
    //let file = std::fs::File::open("/home/max/Projects/FocusTimer/media/success.mp3")?;
 
-   sink.append(rodio::Decoder::new(BufReader::new(file))?);
+   sink.append(Decoder::new(BufReader::new(file))?);
    clearscreen::clear()?;
    println!("Sound of break");
    sink.sleep_until_end();
