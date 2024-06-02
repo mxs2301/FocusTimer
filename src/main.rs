@@ -10,14 +10,32 @@ use std::process::exit;
 
 fn main() {
     let x: Vec<String> = env::args().collect();
+    println!("{:?}", x.len());
 
-    if x[1].trim() == "cli" {
+    if x.len() == 1 {
+        clearscreen::clear().expect("Screen clearing failed");
+        empty_args();
+        exit(0);
+    }
+
+    if x[1].trim() == "cli" || x[1].trim() == "CLI" {
         if let Ok(x) = cli_mode() {
             exit(x)
         }
+    } else if x[1].trim() == "egui" {
+        todo!();
     } else {
         exit(1);
     }
+}
+
+fn empty_args() {
+    println!("FocusTimer is an application to setup timers to focus and breaks in between");
+    println!("To Start the program in CLI-Mode pass CLI or cli as an argument when running the application");
+}
+
+fn gui_mode() -> Result<i32> {
+    Ok(0)
 }
 
 fn cli_mode() -> Result<i32> {
@@ -56,6 +74,7 @@ fn cli_mode() -> Result<i32> {
 #[cfg(test)]
 mod tests {
     use super::audio::play;
+
     //use super::timer::get_time;
     //use super::timer::timer_mockup;
     //use std::time::Duration;
