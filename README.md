@@ -13,6 +13,15 @@
     - [ ] Postponed
   - [x] Read up on how to use sounds in Rust
   - [ ] Refactor print statements
+- [ ] Gui-Mode
+  - [ ] Compare existing GUI-Frameworks
+    - Slint
+    - Egui
+    - iced
+    - vizia
+    - floem
+    - crushy
+    - Ribir
 - [ ] Get dependency list for
   - [ ] SQL Libraries
   - [ ] GUI-Frontend to represent the application(Native or Web?)
