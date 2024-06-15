@@ -3,6 +3,7 @@ use clearscreen::clear;
 use std::error::Error;
 use std::fs::File;
 use std::io::{self, Write};
+use std::str::FromStr;
 use std::{thread::sleep, time::Duration};
 
 fn timer(duration: Duration) -> (u64, u64) {
@@ -93,7 +94,11 @@ fn create_duration(time: i32) -> Duration {
 }
 
 fn get_audio_file() -> Result<File, Box<dyn Error>> {
-    let path = std::path::Path::new("/home/max/Projects/FocusTimer/media/success.mp3");
+    let name = std::env::var("USER")?;
+    let home = String::from("/home/");
+    let path = home + name.as_str() + "/.config/FocusTimer/audio/success.mp3";
+
+    // let path = std::path::Path::new("/home/max/Projects/FocusTimer/media/success.mp3");
     let audio_file = File::open(path)?;
 
     Ok(audio_file)
