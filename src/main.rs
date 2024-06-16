@@ -57,6 +57,7 @@ fn gui_mode() -> Result<i32> {
 }
 
 fn cli_mode() -> Result<i32> {
+    clear().expect("Screen clearing fialed");
     loop {
         println!("Focus Timer - CLI Mode");
         println!("Press q - quit | s - start");
