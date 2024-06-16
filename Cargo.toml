@@ -5,8 +5,10 @@ edition = "2021"
 
 [dependencies]
 clearscreen = "3.0.0"
-rodio = {version = "0.18.*", features = []}
+rodio = { version = "0.18.*", features = [] }
 eframe = '0.27.2'
+iced = {version = "0.12.1", features = ["tokio"]  }
+slint = "1.6.0"
 
 [features]
 cli = []
