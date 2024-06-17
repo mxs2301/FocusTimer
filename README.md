@@ -1,29 +1,31 @@
-# FocusTimer written in Rust and using different things
+# FocusTimer written in Rust as a Hobbyproject
 
-## To-Do 
+## Disclaimer
 
+This is a fun project with many bugs and prone to getting things added and removed.
+At the time of writting, this application has been only tested on Linux and should not work on Windows
 
-- [ ] Cli-Mode
-  - [x] Add a song to mark end of breaks and sessions 
-  - [x] Read up on how to use sounds in Rust
-  - [x] Fix the audio bug
-  - [x] Rewrite the audio function entirely
-  - [x] Add a song to mark end of breaks and sessions
-  - [ ] Add a way interactively select sound
-    - [ ] Postponed
-  - [x] Read up on how to use sounds in Rust
-  - [ ] Refactor print statements
-- [ ] Gui-Mode
-  - [ ] Compare existing GUI-Frameworks
-    - Slint
-    - Egui
-    - iced
-    - vizia
-    - floem
-    - crushy
-    - Ribir
-- [ ] Get dependency list for
-  - [ ] SQL Libraries
-  - [ ] GUI-Frontend to represent the application(Native or Web?)
-- [ ] Read up on using Asyc or multithreading and if it makes sense
-- [ ] Add installer
+## Installation
+
+To use this application, just to clone the repository via: 
+
+```sh
+
+$ git clone http://github.com/mxs2301/FocusTimer
+
+```
+
+Afterwards run in the direcotry FocusTimer the following commands:
+
+```sh
+
+$ python ./install.py
+$ cargo install --release path=.   
+
+```
+
+To remove the application all you have to do is to run `cargo uninstall FocusTimer` and `rm -rf ~/.config/FocusTimer`
+
+## Usage
+
+Just run the application in a terminal via `FocusTimer --cli`
