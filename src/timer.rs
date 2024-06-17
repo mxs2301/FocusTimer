@@ -3,7 +3,6 @@ use clearscreen::clear;
 use std::error::Error;
 use std::fs::File;
 use std::io::{self, Write};
-use std::str::FromStr;
 use std::{thread::sleep, time::Duration};
 
 fn timer(duration: Duration) -> (u64, u64) {
